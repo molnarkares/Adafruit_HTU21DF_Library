@@ -33,6 +33,7 @@
 class Adafruit_HTU21DF {
  public:
   Adafruit_HTU21DF();
+  Adafruit_HTU21DF(int sda, int scl);
   boolean begin(void);
   float readTemperature(void);
   float readHumidity(void);
@@ -40,5 +41,7 @@ class Adafruit_HTU21DF {
  private:
   boolean readData(void);
   float humidity, temp;
+  boolean defaultWire;
+  int htu_sda,htu_scl;
 };
 

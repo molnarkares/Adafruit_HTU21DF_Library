@@ -20,12 +20,22 @@
 #endif
 
 Adafruit_HTU21DF::Adafruit_HTU21DF() {
+	defaultWire = true;
 }
 
+Adafruit_HTU21DF::Adafruit_HTU21DF(int sda, int scl) {
+	htu_sda = sda;
+	htu_scl = scl;
+	defaultWire = false;
+}
 
 boolean Adafruit_HTU21DF::begin(void) {
-  Wire.begin();
-  
+  if(defaultWire) {
+	    Wire.begin();
+  }else {
+	    Wire.begin(htu_sda,htu_scl);
+  }
+
   reset();
 
   Wire.beginTransmission(HTU21DF_I2CADDR);
